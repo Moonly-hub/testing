@@ -23,8 +23,24 @@ local Options = Fluent.Options
 -- Main Tab
 Tabs.Main:AddButton({
     Title = "Button",
-    Description = "Click me",
+    Description = "will grab ball",
     Callback = function()
+local function teleportBallToCharacter(ball, character)
+    if ball and character then
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+        if humanoidRootPart then
+            ball.CFrame = humanoidRootPart.CFrame + Vector3.new(0, 5, 0) -- Adjust the offset as needed
+        else
+            warn("HumanoidRootPart not found in character")
+        end
+    else
+        warn("Ball or character is nil")
+    end
+end
+
+-- Example usage:
+-- teleportBallToCharacter(game.Workspace.Ball, game.Players.LocalPlayer.Character)
+
         print("Button clicked!")
     end
 })
